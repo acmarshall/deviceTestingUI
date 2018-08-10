@@ -1,0 +1,89 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Acme', sans-serif;
+  background-color: lavender;
+}
+
+
+.button {
+	white-space: pre;
+	font-size: 75%;
+	width:25%;
+	display: block;
+
+}
+
+.space {
+  white-space: pre;
+}
+
+.col-centered {
+	float: none;
+    margin: 0 auto;
+}
+
+.img {
+	width: 40px;
+    height: 40px;
+}
+
+.btn-secondary {
+  color: white;
+  background-color:grey;
+  border-style: solid;
+}
+
+.header {
+    background-color: white;
+    border-style: solid;
+    border-radius: 5px;
+    box-shadow: 0 7px 20px -5px rgba(0,0,0,0.2);
+
+}
+
+.test{ 
+  background-color: white;
+    border-style: solid;
+    border-radius: 5px;
+    padding-bottom:40px;
+    padding-left:10px;
+    width: 30%;
+    margin:auto;
+    box-shadow: 0 7px 20px -5px rgba(0,0,0,0.2);
+    display: block;
+
+ }
+
+.historyData{
+  background-color: white;
+    border-style: solid;
+    border-radius: 5px;
+    padding-top: 20px;
+    box-shadow: 0 7px 20px -5px rgba(0,0,0,0.2);
+}
+
+.data{
+	 background-color: white;
+    border-style: solid;
+    border-radius: 5px;
+    padding-left:15px;
+    padding-right:15px;
+    padding-bottom:15px;
+    padding-top:5px;
+    margin-top:20px;
+    box-shadow: 0 7px 20px -5px rgba(0,0,0,0.2);
+}
+
+.green{
+  border-color: #449d44;
+}
+
+.red {
+  border-color: #c12e2a;
+}
+
+.swal2-popup {
+  /*font-size: 1.50rem !important;*/
+}
+
