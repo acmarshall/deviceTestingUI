@@ -61,6 +61,7 @@ body {
     border-radius: 5px;
     padding-top: 20px;
     box-shadow: 0 7px 20px -5px rgba(0,0,0,0.2);
+    margin-bottom:20px;
 }
 
 .data{
