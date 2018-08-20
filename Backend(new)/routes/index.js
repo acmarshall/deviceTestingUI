@@ -9,7 +9,7 @@ var fs = require('fs')
 var buildArray = [];
 var globalReturn = [];
 var parsedInfo = [];
-var fileArray = ['JunitReport.tar.gz']
+var fileArray = ['JunitReport1.tar.gz']
 
 function importxml(fileArray) {
     fileArray.map((data, index)=>{
@@ -315,13 +315,13 @@ router.get('/parsed', function (req, res, next) {
         dbo.collection('devices').findOne({}, function(findErr, result) {
             if(findErr) throw findErr;
             else {
-                if(result !== null) {
-                    console.log('already in')
-                    dbo.collection('devices').deleteOne(result, function(deleteErr, deleteDoc) {
-                        if(deleteErr) throw insertErr;
-                        else console.log('deleted')
-                    })
-                }
+                // if(result !== null) {
+                //     console.log('already in')
+                //     dbo.collection('devices').deleteOne(result, function(deleteErr, deleteDoc) {
+                //         if(deleteErr) throw insertErr;
+                //         else console.log('deleted')
+                //     })
+                // }
                 dbo.collection('devices').insertOne(body, function(insertErr, insertDoc) {
                     if(insertErr) throw insertErr;
                     else console.log(body)
@@ -345,13 +345,13 @@ router.get('/header', function(req, res, next) {
         dbo.collection('header').findOne({}, function(findErr, result) {
             if(findErr) throw findErr;
             else {
-                if(result !== null) {
-                    console.log('already in')
-                    dbo.collection('header').deleteOne(result, function(deleteErr, deleteDoc) {
-                        if(deleteErr) throw insertErr;
-                        else console.log('deleted')
-                    })
-                }
+                // if(result !== null) {
+                //     console.log('already in')
+                //     dbo.collection('header').deleteOne(result, function(deleteErr, deleteDoc) {
+                //         if(deleteErr) throw insertErr;
+                //         else console.log('deleted')
+                //     })
+                // }
                 dbo.collection('header').insertOne(header, function(insertErr, insertDoc) {
                     if(insertErr) throw insertErr;
                     else console.log(header)
@@ -371,24 +371,18 @@ router.get('/info', function(req, res, next) {
         dbo.collection('info').findOne({}, function(findErr, result) {
             if(findErr) throw findErr;
             else {
-                if(result !== null) {
-                    console.log('already in')
-                    dbo.collection('info').deleteOne(result, function(deleteErr, deleteDoc) {
-                        if(deleteErr) throw insertErr;
-                        else console.log('deleted')
-                    })
-                }
+                // if(result !== null) {
+                //     console.log('already in')
+                //     dbo.collection('info').deleteOne(result, function(deleteErr, deleteDoc) {
+                //         if(deleteErr) throw insertErr;
+                //         else console.log('deleted')
+                //     })
+                // }
                 dbo.collection('info').insertOne(info, function(insertErr, insertDoc) {
                     if(insertErr) throw insertErr;
                     else console.log(info)
                 })
             }
-            dbo.collection('devices').find().forEach(function(result){
-                // if(findErr) throw findErr;
-                // else 
-                aMod=delete result._id
-                   dbo.collection('d5').insert(result)
-                    console.log('This happened once')})
         })
                 
 

@@ -18,7 +18,7 @@ app.get('/info', function(req, res, next) {
         if (err) throw err
 
         var dbo = db.db("mydb");
-        dbo.collection('info').findOne({}, function(findErr, result) {
+        dbo.collection('info').findOne({}, {sort:{$natural:-1}}, function(findErr, result) {
             if(findErr) throw findErr;
             else {
             	console.log(result)
@@ -34,7 +34,7 @@ app.get('/devices', function(req, res, next) {
         if (err) throw err
 
         var dbo = db.db("mydb");
-        dbo.collection('devices').findOne({}, function(findErr, result) {
+        dbo.collection('devices').findOne({}, {sort:{$natural:-1}}, function(findErr, result) {
             if(findErr) throw findErr;
             else {
             	console.log(result)
@@ -50,7 +50,7 @@ app.get('/header', function(req, res, next) {
         if (err) throw err
 
         var dbo = db.db("mydb");
-        dbo.collection('header').findOne({}, function(findErr, result) {
+        dbo.collection('header').findOne({}, {sort:{$natural:-1}}, function(findErr, result) {
             if(findErr) throw findErr;
             else {
             	console.log(result)
@@ -66,7 +66,7 @@ app.get('/deviceHistory/', function(req, res, next){
         if (err) throw err 
 
     var dbo = db.db("mydb");
-        dbo.collection('devices').find({}).toArray(function(findErr, result) {
+        dbo.collection('devices').find({}).sort([['_id', -1]]).toArray(function(findErr, result) {
             if(findErr) throw findErr;
             else {
                 console.log(result)
@@ -82,7 +82,7 @@ app.get('/headerHistory/', function(req, res, next){
         if (err) throw err 
 
     var dbo = db.db("mydb");
-        dbo.collection('header').find({}).toArray(function(findErr, result) {
+        dbo.collection('header').find({}).sort([['_id', -1]]).toArray(function(findErr, result) {
             if(findErr) throw findErr;
             else {
                 console.log(result)

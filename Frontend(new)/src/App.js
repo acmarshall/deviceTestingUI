@@ -4,6 +4,7 @@ import './App.css';
 import PageHeader from "./components/PageHeader/PageHeader";
 import Device from "./components/Device";
 import History from "./components/History"; 
+import BackEnd from "./components/BackEnd";
 
 class App extends Component {
   render() {
