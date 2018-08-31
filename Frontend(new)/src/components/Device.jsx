@@ -18,49 +18,41 @@ class Device extends Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:3001/').then((response) => {
-            console.log(response.data)
-        }).catch((error) => {
-            console.log(error);
-        })
+        
+        axios.get('http://localhost:3001/update')
 
-        axios.get('http://localhost:3001/update').then((response) => {
-            console.log(response.data)
-        }).catch((error) => {
-            console.log(error);
-        })
-
-        axios.get('http://localhost:3001/info').then((response) => {
+        .then((response) => {
+            
+            return axios.get('http://localhost:3001/info').then((response) => {
             return axios.get('http://localhost:3002/info').then((res)=> {
                  this.setState({info: res.data})
-            }).catch((error)=> {
-                console.log(error);
-            })
+                })
            
-        }).catch((error) => {
-            console.log(error);
+            })
         })
+        .then((response) => {
 
-        axios.get('http://localhost:3001/header').then((response) => {
+            return axios.get('http://localhost:3001/header').then((response) => {
             return axios.get('http://localhost:3002/header').then((res)=> {
                  this.setState({header: res.data})
-            }).catch((error)=> {
-                console.log(error);
-            })
+                })
            
-        }).catch((error) => {
-            console.log(error);
-        })
+            })
 
-        axios.get('http://localhost:3001/parsed').then((response) => {
+        }) 
+
+        .then((response) => {
+
+            return axios.get('http://localhost:3001/parsed').then((response) => {
             return axios.get('http://localhost:3002/devices').then((res)=> {
                  this.setState({report: res.data})
-            }).catch((error)=> {
-                console.log(error);
-            })
-           
-        }).catch((error) => {
-            console.log(error);
+            })           
+        })
+
+        })
+
+        .catch((error)=> {
+            console.log(error)
         })
 
     }

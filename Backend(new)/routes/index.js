@@ -92,7 +92,7 @@ function getHeader(globalReturn) {
     header['time'] = total_time;
     header['property'] = property;
     header['date'] = date;
-    header['timestamp'] = time_stamp;
+    header['timestamp'] = time_stamp; 
 
     return header;
 }
@@ -157,6 +157,7 @@ function getObject(globalReturn) {
                 time: time,
                 status: status,
                 steps: parsed_step
+               
             };
 
             body[device_name]['tests'][body[device_name]['build']]['testcases'].push(single_testcase);
@@ -315,13 +316,38 @@ router.get('/parsed', function (req, res, next) {
         dbo.collection('devices').findOne({}, function(findErr, result) {
             if(findErr) throw findErr;
             else {
-                // if(result !== null) {
-                //     console.log('already in')
-                //     dbo.collection('devices').deleteOne(result, function(deleteErr, deleteDoc) {
-                //         if(deleteErr) throw insertErr;
-                //         else console.log('deleted')
-                //     })
-                // }
+                       if(result !== null) {
+                       
+                        const deviceName = Object.keys(body)
+                        const deviceObj = Object.values(body)
+                        
+                    dbo.collection('devices').aggregate([
+                    {
+                            $group: 
+                            {
+                                _id : {pass: {pass: "$deviceName.tests.0.pass"}, 
+                                fail: {fail: "$deviceName.tests.0.fail"}, 
+                                time: {time: "$deviceName.tests.0.time"} }, 
+                                dups: {$addToSet: "$_id"}, 
+                                count: {$sum: 1}
+                            }
+                        }, 
+                        {
+                            $match: 
+                            {
+                                count: {"$gt":1}
+                            }
+
+                        }
+                        ]).forEach(function(doc) {
+                            doc.dups.shift(); 
+                            dbo.collection('devices').remove({
+                                _id: {$in:doc.dups}
+                            })
+                        })
+
+                    
+                }
                 dbo.collection('devices').insertOne(body, function(insertErr, insertDoc) {
                     if(insertErr) throw insertErr;
                     else console.log(body)
@@ -345,13 +371,33 @@ router.get('/header', function(req, res, next) {
         dbo.collection('header').findOne({}, function(findErr, result) {
             if(findErr) throw findErr;
             else {
-                // if(result !== null) {
-                //     console.log('already in')
-                //     dbo.collection('header').deleteOne(result, function(deleteErr, deleteDoc) {
-                //         if(deleteErr) throw insertErr;
-                //         else console.log('deleted')
-                //     })
-                // }
+                if(result !== null) {
+                    dbo.collection('header').aggregate([
+                        {
+                            $group: 
+                            {
+                                _id : {time: {time: "$time"}, 
+                                date: {date: "$date"}, 
+                                timestamp: {timestamp: "$timestamp"} }, 
+                                dups: {$addToSet: "$_id"}, 
+                                count: {$sum: 1}
+                            }
+                        }, 
+                        {
+                            $match: 
+                            {
+                                count: {"$gt":1}
+                            }
+
+                        }
+                        ]).forEach(function(doc) {
+                            doc.dups.shift(); 
+                            dbo.collection('header').remove({
+                                _id: {$in:doc.dups}
+                            })
+                        })
+                    
+                }
                 dbo.collection('header').insertOne(header, function(insertErr, insertDoc) {
                     if(insertErr) throw insertErr;
                     else console.log(header)

@@ -21,7 +21,7 @@ app.get('/info', function(req, res, next) {
         dbo.collection('info').findOne({}, {sort:{$natural:-1}}, function(findErr, result) {
             if(findErr) throw findErr;
             else {
-            	console.log(result)
+            	//console.log(result)
             	res.send(result)
             }
         })
@@ -37,7 +37,7 @@ app.get('/devices', function(req, res, next) {
         dbo.collection('devices').findOne({}, {sort:{$natural:-1}}, function(findErr, result) {
             if(findErr) throw findErr;
             else {
-            	console.log(result)
+            	//console.log(result)
             	res.send(result)
             }
         })
@@ -53,7 +53,7 @@ app.get('/header', function(req, res, next) {
         dbo.collection('header').findOne({}, {sort:{$natural:-1}}, function(findErr, result) {
             if(findErr) throw findErr;
             else {
-            	console.log(result)
+            	//console.log(result)
             	res.send(result)
             }
         })
@@ -66,10 +66,37 @@ app.get('/deviceHistory/', function(req, res, next){
         if (err) throw err 
 
     var dbo = db.db("mydb");
+        // dbo.collection('devices').aggregate([
+        //             {
+        //                     $group: 
+        //                     {
+        //                         _id : {pass: {pass: "$TC70.tests.0.pass"}, 
+        //                         fail: {fail: "$TC70.tests.0.fail"}, 
+        //                         time: {time: "$TC70.tests.0.time"} }, 
+        //                         dups: {$addToSet: "$_id"}, 
+        //                         count: {$sum: 1}
+        //                     }
+        //                 }, 
+        //                 {
+        //                     $match: 
+        //                     {
+        //                         count: {"$gt":1}
+        //                     }
+
+        //                 }
+        //                 ]).forEach(function(doc) {
+        //                     doc.dups.shift(); 
+        //                     dbo.collection('header').remove({
+        //                         _id: {$in:doc.dups}
+        //                     })
+        //                 })
+
+                        
+
         dbo.collection('devices').find({}).sort([['_id', -1]]).toArray(function(findErr, result) {
             if(findErr) throw findErr;
             else {
-                console.log(result)
+                //console.log(result)
                 res.send(result)
             }
         })
@@ -82,10 +109,35 @@ app.get('/headerHistory/', function(req, res, next){
         if (err) throw err 
 
     var dbo = db.db("mydb");
+        // dbo.collection('header').aggregate([
+        //                 {
+        //                     $group: 
+        //                     {
+        //                         _id : {time: {time: "$time"}, 
+        //                         date: {date: "$date"}, 
+        //                         timestamp: {timestamp: "$timestamp"} }, 
+        //                         dups: {$addToSet: "$_id"}, 
+        //                         count: {$sum: 1}
+        //                     }
+        //                 }, 
+        //                 {
+        //                     $match: 
+        //                     {
+        //                         count: {"$gt":1}
+        //                     }
+
+        //                 }
+        //                 ]).forEach(function(doc) {
+        //                     doc.dups.shift(); 
+        //                     dbo.collection('header').remove({
+        //                         _id: {$in:doc.dups}
+        //                     })
+        //                 })
+
         dbo.collection('header').find({}).sort([['_id', -1]]).toArray(function(findErr, result) {
             if(findErr) throw findErr;
             else {
-                console.log(result)
+                //console.log(result)
                 res.send(result)
             }
         })
